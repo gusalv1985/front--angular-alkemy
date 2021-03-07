@@ -1,0 +1,25 @@
+<div class="recuadro">
+    <div class="container mt-5 justify-content-center">
+        <h1>Ultimos 10 registros</h1>
+        <div  class="table-responsive table-striped">
+            <table class="table">
+                <thead  class="thead-dark">
+                    <tr>
+                    <th scope="col">Concepto</th>
+                    <th scope="col">Monto</th>
+                    <th scope="col">fecha</th>
+                    <th scope="col">Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let reg of lastRecords">
+                    <th scope="row">{{reg.concepto}}</th>
+                    <td>{{reg.monto}}</td>
+                    <td>{{reg.fecha}}</td>
+                    <td>{{reg.tipo}}</td>
+                    </tr>
+                </tbody>
+                </table>
+        </div>
+    </div>
+</div>
