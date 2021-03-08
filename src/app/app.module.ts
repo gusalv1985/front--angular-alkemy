@@ -7,18 +7,23 @@ import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { ListadoComponent } from './listado/listado.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ServicesService } from './servicios/services.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SaveComponent } from './save/save.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     EncabezadoComponent,
-    ListadoComponent
+    ListadoComponent,
+    SaveComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ServicesService

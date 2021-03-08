@@ -1,1 +1,93 @@
-<p>listado works!</p>
+<div class="recuadro">
+  <div class="containerUsuario mt-5 justify-content-center">
+    <div *ngIf="egreso && !modificar">
+      <div class="row mt-5 d-flex justify-content-around form-group">
+        <h1>Lista Egresos</h1>
+        <button (click)="cambio()" class="btn btn-primary">Ingresos</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Concepto</th>
+              <th scope="col">Monto</th>
+              <th scope="col">fecha</th>
+              <th scope="col">Tipo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reg of regEgreso">
+              <th scope="row">{{reg.concepto}}</th>
+              <td>{{reg.monto}}</td>
+              <td>{{reg.fecha | date: 'dd/MM/yyyy': 'UTC'}}</td>
+              <td>{{reg.tipo}}</td>
+              <td>
+                <button (click)="modify(reg.id)" class="btn btn-primary btn-block">Modificar</button>
+                <button (click)="eliminar(reg.id)" class="btn btn-secondary btn-block">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="!egreso && !modificar">
+      <div class="row mt-5 d-flex justify-content-around form-group">
+        <h1>Lista Ingresos</h1>
+        <button (click)="cambio()" class="btn btn-primary">Ingresos</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Concepto</th>
+              <th scope="col">Monto</th>
+              <th scope="col">fecha</th>
+              <th scope="col">Tipo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reg of regIngreso">
+              <th scope="row">{{reg.concepto}}</th>
+              <td>{{reg.monto}}</td>
+              <td>{{reg.fecha | date: 'dd/MM/yyyy': 'UTC'}}</td>
+              <td>{{reg.tipo}}</td>
+              <td>
+                <button (click)="modify(reg.id)" class="btn btn-primary btn-block">Modificar</button>
+                <button (click)="eliminar(reg.id)" class="btn btn-secondary btn-block">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="modificar">
+      <h1>Modificar Registro</h1>
+      <form [formGroup]="formularioRegistro" (submit)="agregar(formularioRegistro.value)">
+        <div class="row justify-content-center form-group">
+          <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+            <label for="">Concepto:</label>
+            <input [(ngModel)]="readConcepto" formControlName="concepto" type="text" class="form-control">
+          </div>
+          <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+            <label for="">Monto:</label>
+            <input [(ngModel)]="readMonto" formControlName="monto" type="number" class="form-control">
+          </div>
+          <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+            <label for="">Fecha:</label>
+            <input formControlName="fecha" type="date" class="form-control" [ngModel]="readFecha | date:'yyyy-MM-dd' : 'UTC'" >
+          </div>
+          <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+            <label for="">Tipo:</label>
+            <input [(ngModel)]="readTipo"  formControlName="tipo" type="text" class="form-control" disabled>
+          </div>
+        </div>
+        <div class="row mt-5 d-flex justify-content-around form-group">
+            <button class="btn btn-primary" type="submit" [disabled]="!formularioRegistro.valid">Modificar</button>
+            <button class="btn btn-primary" (click)="modify2()">salir</button>
+        </div>
+      </form>
+    </div>
+
+
+  </div>
+</div>

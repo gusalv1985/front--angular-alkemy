@@ -11,14 +11,18 @@ export class HomeComponent implements OnInit {
 
   registros: Array<Registros> = new Array<Registros>();
   lastRecords: Array<Registros> = new Array<Registros>();
+  result: number;
+  sumaEgreso: number = 0;
+  sumaIngreso: number = 0;
 
   constructor(private services: ServicesService) { }
 
   ngOnInit(): void {
-    this.services.readRegistro().subscribe((reg) => {
+    this.services.readRegistros().subscribe((reg) => {
       console.log(reg)
       this.registros = reg;
       this.lastTen();
+      this.balance();
     }, error => {
       console.log(error)
     })
@@ -34,6 +38,19 @@ export class HomeComponent implements OnInit {
       this.lastRecords[n] = reg;
       n++;
     }
+  }
+
+  balance() {
+    this.registros.forEach(e => {
+      if (e.tipo == "egreso") {
+        this.sumaEgreso += e.monto;
+      }
+      if (e.tipo == "ingreso") {
+        this.sumaIngreso += e.monto;
+      }
+    });
+
+    this.result = (this.sumaIngreso - this.sumaEgreso)
   }
 
 }
